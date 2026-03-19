@@ -1,0 +1,16 @@
+# CLI mode: no external dependencies (Python 3.8+ standard library only)
+#
+# GUI mode: requires customtkinter
+customtkinter>=5.2
+
+# SVG icons (pyconify + rendering)
+pyconify>=0.2
+cairosvg>=2.7
+Pillow>=10.0
+
+# Building Windows .exe:
+pyinstaller>=6.0
+
+# Optional (for enhanced features):
+# rich>=13.0    # Beautiful terminal UI (optional)
+# psutil>=5.9   # System process info (optional)
