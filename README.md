@@ -2,7 +2,7 @@
 
 **Better than ExitLag — Free, Open Source, No Subscription**
 
-A Python-based network optimization tool that reduces ping and improves connection quality for online gaming. Features an **AI-powered intelligence engine** that learns from your network history and adapts optimizations in real time. Works on **macOS, Linux, and Windows**.
+A Python-based network optimization tool that reduces ping and improves connection quality for online gaming. Works on **macOS, Linux, and Windows**.
 
 ---
 
@@ -10,15 +10,14 @@ A Python-based network optimization tool that reduces ping and improves connecti
 
 | Feature | Description |
 |---------|-------------|
-| **Smart Mode (AI)** | Auto-detects running games, region, and network quality — picks the optimal server and settings automatically |
-| **Intelligence Engine** | Learns from scan/DNS/route/monitor history to improve recommendations over time |
 | **Full Game Optimization** | One-click optimization for popular games (Valorant, CS2, LoL, Fortnite, etc.) |
-| **Server Scanner** | Adaptive scanning — tests all game servers with strategy tuned to your network condition |
-| **DNS Optimizer** | Intelligent benchmark of 8+ DNS providers with reliability weighting from past results |
-| **Route Analyzer** | Traceroute with bottleneck detection, multi-path analysis, and anomaly comparison |
-| **Real-time Monitor** | Live ping monitoring with jitter, spike detection, stability scoring, and anomaly alerts |
-| **System Optimizer** | OS-level TCP/UDP tuning with per-tweak apply/revert and intelligent auto-configuration |
-| **Socket Tuning** | Game-specific socket profiles (FPS, MOBA, Battle Royale, MMO) plus AI-generated profiles |
+| **Server Scanner** | Tests all game servers and finds the lowest-latency one |
+| **DNS Optimizer** | Benchmarks 8+ DNS providers and finds the fastest |
+| **Route Analyzer** | Traceroute with bottleneck detection and multi-path analysis |
+| **Real-time Monitor** | Live ping monitoring with jitter, spike detection, and stability scoring |
+| **System Optimizer** | OS-level TCP/UDP tuning (delayed ACK, BBR, buffer sizes, etc.) |
+| **Socket Tuning** | Game-specific socket profiles (FPS, MOBA, Battle Royale, MMO) |
+| **MTU Optimizer** | Finds optimal MTU to prevent fragmentation |
 | **Script Generator** | Creates apply/revert scripts for system optimizations |
 
 ## Supported Games
@@ -36,66 +35,44 @@ A Python-based network optimization tool that reduces ping and improves connecti
 ## Quick Start
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
 # CLI mode (terminal)
 python3 main.py
 
-# GUI mode (graphical window)
+# GUI mode (graphical window — best on Windows)
 python3 main.py --gui
 # or directly:
 python3 gui.py
 ```
 
-## GUI
+## GUI Mode (Windows-Focused)
 
-Modern dark-themed interface built with **CustomTkinter**, featuring professional SVG icons (via [pyconify](https://github.com/pyapp-kit/pyconify) + [Lucide](https://lucide.dev/)), sidebar navigation, real-time ping graphs, and slide-in toast notifications.
+Premium graphical interface built with **CustomTkinter** — modern rounded widgets, dark gaming aesthetic with indigo/cyan accents, sidebar navigation, real-time ping graphs, and toast notifications. Designed for Windows but works cross-platform.
 
-### Pages
+### Screenshots Overview
+
+The GUI has 7 pages accessible from the sidebar:
 
 | Page | Features |
 |------|----------|
 | **Dashboard** | Stats cards (ping/jitter/loss/stability), quick-action buttons, activity log |
-| **Smart Mode** | AI-powered auto-detect for game/region/network, recommendations panel, intelligence log |
-| **Server Scanner** | Game & region dropdowns, adaptive scan, results table with latency/loss/status |
-| **DNS Optimizer** | Intelligent benchmark, avg/min/max/reliability table, best DNS card |
-| **Ping Monitor** | Real-time latency graph, live stats, anomaly detection, start/stop toggle |
-| **Route Analyzer** | Traceroute with bottleneck detection, MTU discovery, quality rating, recommendations |
-| **System Optimizer** | Per-tweak apply/revert, intelligent auto-config, apply-all/revert-all, export scripts |
-| **Socket Tuning** | Current settings view, game-specific profiles, AI-generated intelligent profiles |
+| **Server Scanner** | Game & region dropdowns, scan button, results table with latency/loss/status |
+| **DNS Optimizer** | Benchmark all DNS providers, shows avg/min/max/reliability in a table |
+| **Ping Monitor** | Real-time latency graph, live stats (current/avg/min/max/jitter/loss/spikes/stability), start/stop |
+| **Route Analyzer** | Traceroute with bottleneck detection, MTU discovery, quality rating |
+| **System Optimizer** | Per-tweak apply/revert buttons, apply-all/revert-all, export scripts |
+| **Socket Tuning** | View current settings, browse game-specific profiles with details |
 
-### Requirements
+### GUI Requirements
 
 ```bash
-pip install customtkinter pyconify cairosvg Pillow
+pip install customtkinter
 ```
 
-- **macOS**: Requires Cairo (`brew install cairo`) and optionally `python-tk` (`brew install python-tk`)
+Built with [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) for a modern, polished dark-mode experience. Requires Python 3.8+.
+
 - **Windows**: Works out of the box
-- **Linux**: May need `sudo apt install python3-tk libcairo2`
-
-> Icons degrade gracefully — if pyconify/cairosvg aren't installed, the GUI still works with dot fallbacks.
-
-## Intelligence Engine
-
-The intelligence module (`intelligence.py`) adds learning and adaptive behavior across every subsystem:
-
-| Component | What It Does |
-|-----------|-------------|
-| **Game Detection** | Scans running processes to auto-identify games (supports 15+ titles) |
-| **Region Detection** | Geo-locates via timezone/locale, falls back to latency-based measurement |
-| **Network Assessment** | Evaluates base latency, jitter, and packet loss to classify network quality |
-| **Performance History** | Persists scan results to disk — weights recent data for server ranking |
-| **Ping Strategy** | Chooses ping method (TCP/ICMP), count, timeout, and parallelism based on conditions |
-| **DNS History** | Tracks DNS benchmark results over time with reliability scoring |
-| **Route History** | Records traceroute data and detects changes/regressions between runs |
-| **Monitor Anomalies** | Learns baseline latency and alerts on spikes, jitter surges, and loss events |
-| **Adaptive Sockets** | Generates socket profiles tuned to detected game + network condition |
-| **Adaptive OS Config** | Recommends OS-level tweaks based on platform, network quality, and game type |
-| **Smart Select** | Orchestrates all of the above into a single "run everything" analysis |
-
-Data is persisted to `~/.ultimateping/` so the engine improves across sessions.
+- **macOS**: Works (install `python-tk` if needed: `brew install python-tk`)
+- **Linux**: May need `sudo apt install python3-tk` for the tkinter backend
 
 ## CLI Mode
 
@@ -103,7 +80,7 @@ Data is persisted to `~/.ultimateping/` so the engine improves across sessions.
 ```bash
 python3 main.py
 ```
-Launches the full interactive terminal menu with all features.
+This launches the full interactive terminal menu with all features.
 
 ### What Each Option Does
 
@@ -155,7 +132,7 @@ Launches the full interactive terminal menu with all features.
 ## Requirements
 
 - **Python 3.8+** (uses asyncio)
-- **GUI dependencies**: `customtkinter`, `pyconify`, `cairosvg`, `Pillow`
+- No external packages required
 - `sudo` access for system optimizations (optional)
 
 ## How It Works
@@ -173,27 +150,11 @@ Applies kernel-level network tuning via:
 
 All changes are reversible with the built-in revert feature.
 
-## Building
-
-### macOS (.app)
-```bash
-bash build_macos.sh
-```
-
-### Windows (.exe)
-```batch
-build_windows.bat
-```
-
-Both use PyInstaller and include the app icon.
-
 ## Project Structure
 
 ```
 exitlag/
 ├── main.py              # CLI application & interactive menu
-├── gui.py               # CustomTkinter GUI (dark theme, SVG icons)
-├── intelligence.py      # AI intelligence engine (learning, adaptive strategies)
 ├── config.py            # Configuration, game servers, DNS servers
 ├── network_scanner.py   # ICMP/TCP ping, multi-ping, jitter measurement
 ├── route_optimizer.py   # Traceroute, route analysis, MTU optimization
@@ -201,11 +162,7 @@ exitlag/
 ├── tcp_udp_tuner.py     # Socket profiles and TCP/UDP tuning
 ├── ping_monitor.py      # Real-time monitoring with statistics
 ├── os_optimizer.py      # OS-level network optimizations
-├── gen_icon.py          # Icon generation utility
-├── build_macos.sh       # macOS build script (PyInstaller)
-├── build_windows.bat    # Windows build script (PyInstaller)
-├── ultimateping.spec    # PyInstaller spec file
-├── requirements.txt     # Dependencies
+├── requirements.txt     # Dependencies (customtkinter for GUI)
 └── README.md            # This file
 ```
 
